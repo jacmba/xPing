@@ -1,6 +1,8 @@
 // Basic XPL skeleton
 
 #include <XPLMProcessing.h>
+#include <imgui.h>
+#include <string.h>
 
 #if IBM
 	#include <Windows.h>
@@ -12,6 +14,16 @@
 
 // Called by XPlane when DLL is loaded - Returns 1 when successfully loaded
 PLUGIN_API int XPluginStart(char *name, char *signature, char *description) {
+	char n[] = "xPing";
+	char s[] = "net.jazbelt.xping";
+	char d[] = "ACARS client plugin with CPDLC capabilities";
+
+	strcpy_s(name, sizeof(n), n);
+	strcpy_s(signature, sizeof(s), s);
+	strcpy_s(description, sizeof(d), d);
+
+	ImGui::ShowDemoWindow();
+	
 	return 1;
 }
 

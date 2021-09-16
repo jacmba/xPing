@@ -75,32 +75,32 @@
     <TargetExt>.xpl</TargetExt>
     <OutDir>$(SolutionDir)$(Configuration)\$(ProjectName)\$(PlatformTarget)</OutDir>
     <TargetName>win</TargetName>
-    <IncludePath>D:\Jacinto\Libs\XPSDK303\SDK\CHeaders\XPLM;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Jacinto\Libs\XPSDK303\SDK\Libraries\Win;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Jacinto\Libs\imgui\headers;D:\Jacinto\Libs\XPSDK303\SDK\CHeaders\XPLM;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Jacinto\Libs\XPSDK303\SDK\Libraries\Win;D:\Jacinto\Libs\imgui\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <TargetExt>.xpl</TargetExt>
     <OutDir>$(SolutionDir)$(Configuration)\$(ProjectName)\64</OutDir>
     <TargetName>win</TargetName>
-    <IncludePath>D:\Jacinto\Libs\XPSDK303\SDK\CHeaders\XPLM;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Jacinto\Libs\XPSDK303\SDK\Libraries\Win;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Jacinto\Libs\imgui\headers;D:\Jacinto\Libs\XPSDK303\SDK\CHeaders\XPLM;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Jacinto\Libs\XPSDK303\SDK\Libraries\Win;D:\Jacinto\Libs\imgui\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <TargetExt>.xpl</TargetExt>
     <OutDir>$(SolutionDir)$(Configuration)\$(ProjectName)\$(PlatformTarget)</OutDir>
     <TargetName>win</TargetName>
-    <IncludePath>D:\Jacinto\Libs\XPSDK303\SDK\CHeaders\XPLM;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Jacinto\Libs\XPSDK303\SDK\Libraries\Win;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Jacinto\Libs\imgui\headers;D:\Jacinto\Libs\XPSDK303\SDK\CHeaders\XPLM;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Jacinto\Libs\XPSDK303\SDK\Libraries\Win;D:\Jacinto\Libs\imgui\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <TargetExt>.xpl</TargetExt>
     <OutDir>$(SolutionDir)$(Configuration)\$(ProjectName)\64</OutDir>
     <TargetName>win</TargetName>
-    <IncludePath>D:\Jacinto\Libs\XPSDK303\SDK\CHeaders\XPLM;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Jacinto\Libs\XPSDK303\SDK\Libraries\Win;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Jacinto\Libs\imgui\headers;D:\Jacinto\Libs\XPSDK303\SDK\CHeaders\XPLM;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Jacinto\Libs\XPSDK303\SDK\Libraries\Win;D:\Jacinto\Libs\imgui\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -116,7 +116,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>XPLM_64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>XPLM_64.lib;ImGUI_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -133,7 +133,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>XPLM_64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>XPLM_64.lib;ImGUI_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -154,7 +154,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>XPLM_64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>XPLM_64.lib;ImGUI_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -175,12 +175,12 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>XPLM_64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>XPLM_64.lib;ImGUI_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="XPlane11Plugin.cpp" />
+    <ClCompile Include="xPing.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

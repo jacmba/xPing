@@ -18,7 +18,7 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="XPlane11Plugin.cpp">
+    <ClCompile Include="xPing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
