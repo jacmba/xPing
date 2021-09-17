@@ -1,12 +1,24 @@
 // Basic XPL skeleton
 
 #include <XPLMProcessing.h>
-#include <imgui.h>
 #include <string.h>
+#include <memory>
 
 #if IBM
 	#include <Windows.h>
 #endif // IBM
+
+#include "AcarsWindow.h";
+
+// Gobal vars
+std::shared_ptr<AcarsWindow> acarsWindow;
+ImFontAtlas* fontAtlas;
+
+// Execute on first flight cycle
+float deferredStart(float meTime, float loopTime, int counter, void* refCon) {
+	acarsWindow->SetVisible(true);
+	return 0;
+}
 
 /**********************************************
 	REQUIRED CALLBACKS
@@ -22,7 +34,9 @@ PLUGIN_API int XPluginStart(char *name, char *signature, char *description) {
 	strcpy_s(signature, sizeof(s), s);
 	strcpy_s(description, sizeof(d), d);
 
-	ImGui::ShowDemoWindow();
+	XPLMRegisterFlightLoopCallback(deferredStart, -1, NULL);
+
+	acarsWindow = std::make_shared<AcarsWindow>();
 	
 	return 1;
 }
