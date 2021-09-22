@@ -42,7 +42,9 @@ PLUGIN_API int XPluginStart(char *name, char *signature, char *description) {
 }
 
 // Called before the DLL is unloaded
-PLUGIN_API void XPluginStop(void) {}
+PLUGIN_API void XPluginStop(void) {
+	acarsWindow->SetVisible(false);
+}
 
 // Called before the plugin is enabled - Returns 1 when successfully starts
 PLUGIN_API int XPluginEnable(void) {
@@ -50,7 +52,9 @@ PLUGIN_API int XPluginEnable(void) {
 }
 
 // Called before the plugin is disabled
-PLUGIN_API void XPluginDisable(void) {}
+PLUGIN_API void XPluginDisable(void) {
+	acarsWindow->SetVisible(false);
+}
 
 //Called by Plugin Manager when message is sent to us
 PLUGIN_API void XPluginReceiveMessage(XPLMPluginID from, int message, void *param) {}

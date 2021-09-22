@@ -1,6 +1,6 @@
 #include "AcarsWindow.h"
 
-AcarsWindow::AcarsWindow(ImFontAtlas* fontAtlas) /*: ImgWindow(fontAtlas)*/ {
+AcarsWindow::AcarsWindow(ImFontAtlas* fontAtlas) : ImgWindow(fontAtlas) {
 	Init(600, 400, 200, 200);
 }
 

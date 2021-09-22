@@ -8,6 +8,6 @@ public:
 	~AcarsWindow() final = default;
 
 protected:
-	void BuildInterface() /*override*/;
+	void BuildInterface() override;
 };
 
