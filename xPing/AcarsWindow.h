@@ -1,6 +1,7 @@
 #pragma once
 
 #include <imgwindow.h>
+#include <string>
 
 class AcarsWindow : public ImgWindow {
 public:
@@ -9,5 +10,8 @@ public:
 
 protected:
 	void BuildInterface() override;
+
+private:
+	std::string globalText;
 };
 
