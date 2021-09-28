@@ -2,17 +2,17 @@
 #include <cstring>
 
 AcarsWindow::AcarsWindow(ImFontAtlas* fontAtlas) : ImgWindow(fontAtlas) {
-	globalText = "";
+	globalText = "xPing CPDLC ACARS - Jacinto Mba 2021";
 	Init(600, 300, 200, 500);
 }
 
 void AcarsWindow::BuildInterface() {
 
 	ImGui::BeginGroup();
-	for (int i = 1; i <= 4; i++) {
+	for (int i = 0; i < 4; i++) {
 		ImGui::PushID(100 + i);
 		if (ImGui::Button(">")) {
-			globalText = "L" + std::to_string(i) + " " + scratchBuff;
+			lText[i] = scratchBuff;
 		}
 		ImGui::PopID();
 	}
@@ -20,15 +20,20 @@ void AcarsWindow::BuildInterface() {
 
 	ImGui::SameLine();
 	ImGui::BeginChild("Screen", ImVec2(525, 200), true);
-	ImGui::TextColored(ImVec4(0, 1, 0, 1), globalText.c_str());
+	for (int i = 0; i < 4; i++) {
+		ImGui::TextColored(BLUE, lText[i].c_str());
+		ImGui::SameLine();
+		ImGui::TextColored(BLUE, rText[i].c_str());
+	}
+	ImGui::TextColored(GREEN, globalText.c_str());
 	ImGui::EndChild();
 	ImGui::SameLine();
 
 	ImGui::BeginGroup();
-	for (int i = 1; i <= 4; i++) {
+	for (int i = 0; i < 4; i++) {
 		ImGui::PushID(200 + i);
 		if (ImGui::Button("<")) {
-			globalText = "R" + std::to_string(i) + " " + scratchBuff;
+			rText[i] = scratchBuff;
 		}
 		ImGui::PopID();
 	}
