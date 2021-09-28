@@ -13,5 +13,6 @@ protected:
 
 private:
 	std::string globalText;
+	char scratchBuff[128] = "";
 };
 

@@ -7,11 +7,12 @@ AcarsWindow::AcarsWindow(ImFontAtlas* fontAtlas) : ImgWindow(fontAtlas) {
 }
 
 void AcarsWindow::BuildInterface() {
+
 	ImGui::BeginGroup();
 	for (int i = 1; i <= 4; i++) {
 		ImGui::PushID(100 + i);
 		if (ImGui::Button(">")) {
-			globalText = "L" + std::to_string(i);
+			globalText = "L" + std::to_string(i) + " " + scratchBuff;
 		}
 		ImGui::PopID();
 	}
@@ -27,9 +28,14 @@ void AcarsWindow::BuildInterface() {
 	for (int i = 1; i <= 4; i++) {
 		ImGui::PushID(200 + i);
 		if (ImGui::Button("<")) {
-			globalText = "R" + std::to_string(i);
+			globalText = "R" + std::to_string(i) + " " + scratchBuff;
 		}
 		ImGui::PopID();
 	}
 	ImGui::EndGroup();
+	
+	ImVec2 pos = ImGui::GetCursorPos();
+	pos.x += 50;
+	ImGui::SetCursorPos(pos);
+	ImGui::InputText("", scratchBuff, IM_ARRAYSIZE(scratchBuff));
 }
