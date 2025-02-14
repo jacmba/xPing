@@ -11,26 +11,47 @@
 	#error This is made to be compiled against the XPLM300 SDK
 #endif
 
+#include "ui/Colors.h"
+#include "ui/Input.h"
+
 static XPLMWindowID g_window = NULL;
 
 xPing::Button *button;
+xPing::Input *textInput;
+xPing::Input* passwordInput;
+
+int clicks = 0;
 int lastX;
 int lastY;
 
 void draw_window(XPLMWindowID in_window_id, void *in_refcon);
-int draw_nuklear(XPLMDrawingPhase inPhase, int inIsBefore, void* inRefcon);
 
 int mouse_handler(XPLMWindowID in_window_id, int x, int y, XPLMMouseStatus in_mouse, void* in_refcon) {
 	button->checkClick(in_mouse);
+	textInput->checkClick();
+	passwordInput->checkClick();
 	return 1; 
 }
 
 XPLMCursorStatus cursor_handler(XPLMWindowID in_window_id, int x, int y, void* in_refcon) {
 	button->checkHover(x, y);
+	textInput->checkHover(x, y);
+	passwordInput->checkHover(x, y);
 	return xplm_CursorDefault;
 }
 
-void dummy_key_handler(XPLMWindowID in_window_id, char key, XPLMKeyFlags flags, char virtual_key, void* in_refcon, int losing_focus) { }
+void key_handler(XPLMWindowID in_window_id, char key, XPLMKeyFlags flags, char virtual_key, void* in_refcon, int losing_focus) {
+	if (losing_focus) {
+		XPLMDebugString("Losing focus\n");
+		return;
+	}
+
+	std::string msg = "Key pressed: " + key + '\n';
+	XPLMDebugString(msg.c_str());
+
+	textInput->checkKey(key);
+	passwordInput->checkKey(key);
+}
 
 int dummy_wheel_handler(XPLMWindowID inWindowID, int x, int y, int wheel, int clicks, void* inRefcon) { return 0; }
 
@@ -55,7 +76,7 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc) {
     params.drawWindowFunc = draw_window;
     params.handleMouseClickFunc = mouse_handler;
 	params.handleCursorFunc = cursor_handler;
-	params.handleKeyFunc = dummy_key_handler;
+	params.handleKeyFunc = key_handler;
 	params.handleMouseWheelFunc = dummy_wheel_handler;
     params.layer = xplm_WindowLayerFloatingWindows;
 	params.refcon = NULL;
@@ -80,11 +101,15 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc) {
 	lastX = l;
 	lastY = t;
 
-	button = new xPing::Button(l + 200, t - 100, "Click me!");
-
+	button = new xPing::Button(l + 20, b + 20, "Click me!");
 	button->registerClickCallback([]() {
-		XPLMDebugString("xPing: Button clicked!\n");
+		std::string msg = "Button clicked " + std::to_string(++clicks) + " times!\n";
+		button->changeLabel(msg);
+		XPLMDebugString(msg.c_str());
 	});
+
+	textInput = new xPing::Input(l + 20, t - 20, "Enter text here:");
+	passwordInput = new xPing::Input(l + 20, t - 50, "Enter password here:", 30, true);
     
     return 1;
 }
@@ -92,10 +117,14 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc) {
 PLUGIN_API void XPluginStop(void) {
     XPLMDestroyWindow(g_window);
 	delete button;
+	delete textInput;
+	delete passwordInput;
 	g_window = NULL;
 }
 
 void draw_window(XPLMWindowID in_window_id, void *in_refcon) {
+	XPLMTakeKeyboardFocus(g_window);
+
     int l, t, r, b;
     XPLMGetWindowGeometry(in_window_id, &l, &t, &r, &b);
 
@@ -110,11 +139,8 @@ void draw_window(XPLMWindowID in_window_id, void *in_refcon) {
 		0  // No depth offset
 	);
 
-    float green[] = { 0.0, 1.0, 0.0, 1.0 };
-	float black[] = { 0.0, 0.0, 0.0, 1.0 };
-
 	// Draw a black rectangle as the window background
-	glColor4fv(black);
+	glColor4fv(xPing::Colors::BLACK);
 		glBegin(GL_QUADS);
 		glVertex2i(l, t);
 		glVertex2i(r, t);
@@ -122,7 +148,7 @@ void draw_window(XPLMWindowID in_window_id, void *in_refcon) {
 		glVertex2i(l, b);
 	glEnd();
 
-    glColor4fv(green);
+    glColor4fv(xPing::Colors::GREEN);
 	glBegin(GL_LINE_LOOP);
 	    glVertex2i(l, t);
 	    glVertex2i(r, t);
@@ -135,6 +161,12 @@ void draw_window(XPLMWindowID in_window_id, void *in_refcon) {
 
 	button->updatePosition(deltaX, deltaY);
 	button->draw();
+
+	textInput->updatePosition(deltaX, deltaY);
+	textInput->draw();
+
+	passwordInput->updatePosition(deltaX, deltaY);
+	passwordInput->draw();
 
 	lastX = l;
 	lastY = t;

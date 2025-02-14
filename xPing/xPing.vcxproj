@@ -181,11 +181,14 @@
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="ui\Button.cpp" />
+    <ClCompile Include="ui\Colors.cpp" />
+    <ClCompile Include="ui\Input.cpp" />
     <ClCompile Include="xPing.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ui\Button.h" />
     <ClInclude Include="ui\Colors.h" />
+    <ClInclude Include="ui\Input.h" />
     <ClInclude Include="ui\IWidget.h" />
     <ClInclude Include="ui\opengl.h" />
   </ItemGroup>

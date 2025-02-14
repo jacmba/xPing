@@ -22,6 +22,7 @@ namespace xPing
 		void registerClickCallback(std::function<void()> callback);
 		void checkClick(XPLMMouseStatus status);
 		void checkHover(int x, int y);
+		void changeLabel(std::string newLabel);
 
 	private:
 		std::function<void()> onClick;

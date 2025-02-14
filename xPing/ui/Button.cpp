@@ -25,17 +25,17 @@ xPing::Button::Button(
 void xPing::Button::draw()
 {
 
-	float* bg_color = NAVY_BLUE;
+	float* bg_color = Colors::NAVY_BLUE;
 	if (hovered) {
-		bg_color = HOVER_BLUE;
+		bg_color = Colors::HOVER_BLUE;
 	}
 
 	if (clicked) {
-		bg_color = CLICK_BLUE;
+		bg_color = Colors::CLICK_BLUE;
 	}
 
 	// Draw the button frame in light gray
-	glColor4fv(LIGHT_BLUE);
+	glColor4fv(Colors::LIGHT_BLUE);
 	glBegin(GL_QUADS);
 		glVertex2i(l, t);
 		glVertex2i(r, t);
@@ -53,7 +53,7 @@ void xPing::Button::draw()
 	glEnd();
 
 	// Draw the button text in the center
-	XPLMDrawString(WHITE, l + 5, t - 15, label.c_str(), NULL, xplmFont_Proportional);
+	XPLMDrawString(Colors::WHITE, l + 5, t - 15, label.c_str(), NULL, xplmFont_Proportional);
 }
 
 void xPing::Button::registerClickCallback(std::function<void()> callback)
@@ -75,4 +75,12 @@ void xPing::Button::checkClick(XPLMMouseStatus status)
 void xPing::Button::checkHover(int x, int y)
 {
 	hovered = x >= l && x <= r && y <= t && y >= b;
+}
+
+void xPing::Button::changeLabel(std::string newLabel)
+{
+	label = newLabel;
+	labelWidth = XPLMMeasureString(xplmFont_Proportional, label.c_str(), label.length());
+	buttonWidth = labelWidth + 10;
+	r = l + buttonWidth;
 }
