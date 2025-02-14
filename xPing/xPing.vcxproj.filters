@@ -21,12 +21,21 @@
     <ClCompile Include="xPing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AcarsWindow.cpp">
+    <ClCompile Include="ui\Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AcarsWindow.h">
+    <ClInclude Include="ui\IWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\opengl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\Colors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

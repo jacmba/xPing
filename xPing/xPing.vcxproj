@@ -23,7 +23,7 @@
     <ProjectGuid>{db3e9026-123b-44b5-b6d8-79b3939d0fc6}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>xPing</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -83,8 +83,8 @@
     <TargetExt>.xpl</TargetExt>
     <OutDir>$(SolutionDir)$(Configuration)\$(ProjectName)\64</OutDir>
     <TargetName>win</TargetName>
-    <IncludePath>D:\Jacinto\Libs\imgui\headers;D:\Jacinto\Libs\XPSDK303\SDK\CHeaders\XPLM;D:\Jacinto\Libs\imgx\headers;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Jacinto\Libs\imgx\lib;D:\Jacinto\Libs\XPSDK303\SDK\Libraries\Win;D:\Jacinto\Libs\imgui\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Libs\XPSDK411\SDK\CHeaders\XPLM;C:\Libs\XPSDK411\SDK\CHeaders\Widgets;C:\Libs\XPSDK411\SDK\CHeaders\Wrappers;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Libs\XPSDK411\SDK\Libraries\Win;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -125,7 +125,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>IBM;XPLM200;XPLM201;XPLM210;XPLM300;XPLM301;XPLM302;XPLM303;_DEBUG;XPLANE11PLUGIN_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>IBM;XPLM200;XPLM201;XPLM210;XPLM300;XPLM301;XPLM302;XPLM303;_DEBUG;XPLANE11PLUGIN_EXPORTS;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -133,7 +133,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>XPLM_64.lib;ImGUI_x64.lib;imgx.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>XPLM_64.lib;XPWidgets_64.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -179,12 +179,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AcarsWindow.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="ui\Button.cpp" />
     <ClCompile Include="xPing.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AcarsWindow.h" />
+    <ClInclude Include="ui\Button.h" />
+    <ClInclude Include="ui\Colors.h" />
+    <ClInclude Include="ui\IWidget.h" />
+    <ClInclude Include="ui\opengl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
