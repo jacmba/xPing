@@ -14,16 +14,19 @@
 static XPLMWindowID g_window = NULL;
 
 xPing::Button *button;
+int lastX;
+int lastY;
 
 void draw_window(XPLMWindowID in_window_id, void *in_refcon);
 int draw_nuklear(XPLMDrawingPhase inPhase, int inIsBefore, void* inRefcon);
 
 int mouse_handler(XPLMWindowID in_window_id, int x, int y, XPLMMouseStatus in_mouse, void* in_refcon) {
+	button->checkClick(in_mouse);
 	return 1; 
 }
 
 XPLMCursorStatus cursor_handler(XPLMWindowID in_window_id, int x, int y, void* in_refcon) {
-
+	button->checkHover(x, y);
 	return xplm_CursorDefault;
 }
 
@@ -72,7 +75,16 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc) {
 
 	XPLMDebugString("xPing: Plugin started\n");
 
-	button = new xPing::Button(200, 100, "Click me!");
+	int l, t, r, b;
+	XPLMGetWindowGeometry(g_window, &l, &t, &r, &b);
+	lastX = l;
+	lastY = t;
+
+	button = new xPing::Button(l + 200, t - 100, "Click me!");
+
+	button->registerClickCallback([]() {
+		XPLMDebugString("xPing: Button clicked!\n");
+	});
     
     return 1;
 }
@@ -118,7 +130,13 @@ void draw_window(XPLMWindowID in_window_id, void *in_refcon) {
 	    glVertex2i(l, b);
 	glEnd();
 
-	// Draw a button in the center of the window
+	int deltaX = l - lastX;
+	int deltaY = t - lastY;
+
+	button->updatePosition(deltaX, deltaY);
 	button->draw();
+
+	lastX = l;
+	lastY = t;
 }
 

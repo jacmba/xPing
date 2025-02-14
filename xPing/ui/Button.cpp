@@ -53,7 +53,7 @@ void xPing::Button::draw()
 	glEnd();
 
 	// Draw the button text in the center
-	XPLMDrawString(WHITE, l + 5, b - 15, label.c_str(), NULL, xplmFont_Proportional);
+	XPLMDrawString(WHITE, l + 5, t - 15, label.c_str(), NULL, xplmFont_Proportional);
 }
 
 void xPing::Button::registerClickCallback(std::function<void()> callback)
